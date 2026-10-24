@@ -1,0 +1,51 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>記事タイ比較あんてな私用　＼(*^◯^*)／</title><style>
+* { box-sizing:border-box; }
+/* 文字サイズは newsoku.oowata.com に倣う: 一覧の文字はブラウザ既定の 16px、日付見出しは 14px、タブは 14px 太字 */
+body { margin:0; background:#fff; color:#666; font-family:"ＭＳ Ｐゴシック","MS PGothic","Meiryo","Hiragino Sans",sans-serif; font-size:16px; line-height:1.45; }
+a { color:#666; text-decoration:none; }
+a:hover { color:#000; }
+.wrap { max-width:1000px; margin:0 auto; padding:0 10px; }
+header { padding:10px 0 6px; }
+h1 { font-size:18px; font-weight:normal; color:#333; margin:0; }
+h1 a { color:#333; }
+h1 .sub { font-size:12px; color:#888; margin-left:12px; }
+.tabs { display:flex; gap:4px; margin:10px 0; }
+.tab { flex:1; text-align:center; padding:6px 4px; color:#444; font-size:14px; font-weight:bold; border-bottom:3px solid transparent; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tab.active { border-bottom-color:#e8669a; color:#222; }
+.toolbar { display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin:10px 0; font-size:13px; color:#666; }
+.toolbar select { font-size:13px; }
+.toolbar button { font-size:13px; padding:3px 10px; border:1px solid #f0a9c8; background:#fff0f6; color:#b03070; border-radius:3px; cursor:pointer; }
+.toolbar button.on { background:#e8669a; color:#fff; }
+.box { border:3px solid #f9c0d8; padding:6px 12px 10px; }
+.date { font-size:14px; font-weight:bold; text-decoration:underline; color:#666; margin:8px 0 4px; }
+.row { display:flex; gap:10px; align-items:baseline; padding:2px 0; }
+.row .time { flex:0 0 50px; color:#666; font-size:16px; white-space:nowrap; }
+.row .ttl { flex:1; min-width:0; font-size:16px; }
+.row .site { flex:0 0 200px; color:#666; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topic.multi { border-top:1px dotted #f3c6da; margin-top:5px; padding-top:4px; }
+.topic.multi .head .ttl b { color:#333; font-weight:bold; }
+.topic.multi .row.m { padding-left:14px; }
+.topic.multi .row.m .time { flex-basis:60px; }
+.sum { color:#888; font-size:13px; padding:0 0 2px 60px; }
+.chip { display:inline-block; font-size:12px; line-height:18px; padding:0 6px; border-radius:3px; background:#f2f2f2; color:#666; margin-left:4px; vertical-align:middle; white-space:nowrap; }
+.chip.jp { background:#e3eefc; color:#1d6fd6; }
+.chip.warn { background:#fff1dc; color:#b45309; }
+.chip.ok { background:#e7f6ec; color:#15803d; }
+.chip.count { margin:0 6px 0 0; font-weight:bold; }
+.row .site a { color:#666; }
+.row .site a:hover { color:#000; text-decoration:underline; }
+.chip.first { background:#f3e8ff; color:#6b21a8; }
+.tag { font-size:10.5px; border:1px solid #ddd; border-radius:3px; padding:0 4px; margin-left:4px; color:#888; font-style:normal; }
+.tag.rule { color:#15803d; border-color:#b7e3c5; }
+.tag.first { color:#6b21a8; border-color:#d8b4fe; }
+.hidden { display:none; }
+.small { color:#888; font-size:12px; }
+.bottom { margin-top:6px; }
+table.cmp { width:100%; border-collapse:collapse; font-size:12.5px; background:#fff; }
+table.cmp th, table.cmp td { border:1px solid #f0c8da; padding:5px 7px; vertical-align:top; }
+table.cmp th { background:#fff0f6; position:sticky; top:0; }
+table.cmp td.t { min-width:160px; }
+.diff { background:#fde8e8; border-radius:3px; padding:0 3px; }
+footer { color:#999; font-size:12px; text-align:center; padding:20px; }
+@media (max-width:640px) { body { font-size:15px; } .row .time, .row .ttl, .row .site { font-size:15px; } .row { flex-wrap:wrap; } .row .site { flex-basis:100%; padding-left:60px; } .tab { font-size:12px; } .wrap { padding:0 6px; } }
+</style></head><body><div class="wrap"><header><h1><a href="index.html">記事タイ比較あんてな私用　＼(*^◯^*)／</a></h1></header><main><div class="box"><p>まとめサイトの記事を取り込み、元ネタ (元スレ・X 投稿・ニュース) を機械的に調べて同じ話題を束ね、国と時期を表示します。AI の判定は 4 系統を並走させ、系統ごとに別のページを作っています。上のタブから選んでください。</p><p>記事 1351 件 · 最終実行 10/24 20:08</p><ul><li><a href="haiku/index.html">Claude Haiku 5.5</a> … 話題 433 件 (複数まとめ 73 件)</li><li><a href="sonnet/index.html">Claude Sonnet 5.5</a> … 話題 407 件 (複数まとめ 68 件)</li><li><a href="opus/index.html">Claude Opus 5.5</a> … 話題 906 件 (複数まとめ 183 件)</li><li><a href="gpt/index.html">GPT-6.1 Sol</a> … 話題 909 件 (複数まとめ 181 件)</li><li><a href="astra/index.html">GPT-6 Astra</a> … 話題 922 件 (複数まとめ 180 件)</li><li><a href="compare/index.html">系統の比較</a> … 判定の食い違いと費用</li></ul><h2>見方</h2><ul><li>既定では、<b>2 件以上のまとめが束ねられた話題</b>だけを表示します。1 件だけの話題は「1 件のものを表示」ボタンで展開できます。行頭の「N サイトで話題」は取り上げたまとめサイトの数で、2 サイトは水色、3 は黄、4 は橙、5 は赤、6 以上は紫です。</li><li>話題の中の記事は新しい順。いちばん下が最初に載せたまとめです。記事行の日付は、見出しの日と同じなら時刻だけ、違う日なら月日だけ。</li><li><b>国</b>は日本以外の話題にだけ表示。海外の話題でも日本が関係するものには「日本関連」を付けます。</li><li><b>時期</b>は見出しの日と違う月の話題にだけ表示 (AI が判定した、出来事が世に出た年月。雑談など時期が無いものは元スレの日付)。6 か月以上前なら橙色。事件そのものがさらに古い場合は「事件は …」を併記。</li></ul></div></main><div class="bottom"><div class="tabs"><a class="tab" style="background:#D4E4FF" href="haiku/index.html">Claude Haiku 5.5</a><a class="tab" style="background:#FFD4E4" href="sonnet/index.html">Claude Sonnet 5.5</a><a class="tab" style="background:#D4FFE4" href="opus/index.html">Claude Opus 5.5</a><a class="tab" style="background:#DAFFD6" href="gpt/index.html">GPT-6.1 Sol</a><a class="tab" style="background:#D6FFFA" href="astra/index.html">GPT-6 Astra</a><a class="tab" style="background:#FAD6FF" href="compare/index.html">比較</a></div></div><footer>生成 2026-10-24 20:08 (日本時間)</footer></div></body></html>
