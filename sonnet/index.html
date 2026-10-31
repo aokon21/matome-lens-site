@@ -1,0 +1,93 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>記事タイ比較あんてな私用　＼(*^◯^*)／</title><style>
+* { box-sizing:border-box; }
+/* 文字サイズは newsoku.oowata.com に倣う: 一覧の文字はブラウザ既定の 16px、日付見出しは 14px、タブは 14px 太字 */
+body { margin:0; background:#fff; color:#666; font-family:"ＭＳ Ｐゴシック","MS PGothic","Meiryo","Hiragino Sans",sans-serif; font-size:16px; line-height:1.45; }
+a { color:#666; text-decoration:none; }
+a:hover { color:#000; }
+.wrap { max-width:1000px; margin:0 auto; padding:0 10px; }
+header { padding:10px 0 6px; }
+h1 { font-size:18px; font-weight:normal; color:#333; margin:0; }
+h1 a { color:#333; }
+h1 .sub { font-size:12px; color:#888; margin-left:12px; }
+.tabs { display:flex; gap:4px; margin:10px 0; }
+.tab { flex:1; text-align:center; padding:6px 4px; color:#444; font-size:14px; font-weight:bold; border-bottom:3px solid transparent; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tab.active { border-bottom-color:#e8669a; color:#222; }
+.toolbar { display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin:10px 0; font-size:13px; color:#666; }
+.toolbar select { font-size:13px; }
+.toolbar button { font-size:13px; padding:3px 10px; border:1px solid #f0a9c8; background:#fff0f6; color:#b03070; border-radius:3px; cursor:pointer; }
+.toolbar button.on { background:#e8669a; color:#fff; }
+.box { border:3px solid #f9c0d8; padding:6px 12px 10px; }
+.date { font-size:14px; font-weight:bold; text-decoration:underline; color:#666; margin:8px 0 4px; }
+.row { display:flex; gap:10px; align-items:baseline; padding:2px 0; }
+.row .time { flex:0 0 50px; color:#666; font-size:16px; white-space:nowrap; }
+.row .ttl { flex:1; min-width:0; font-size:16px; }
+.row .site { flex:0 0 200px; color:#666; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topic.multi { border-top:1px dotted #f3c6da; margin-top:5px; padding-top:4px; }
+.topic.multi .head .ttl b { color:#333; font-weight:bold; }
+.topic.multi .row.m { padding-left:14px; }
+.topic.multi .row.m .time { flex-basis:60px; }
+.sum { color:#888; font-size:13px; padding:0 0 2px; }
+.chip { display:inline-block; font-size:12px; line-height:18px; padding:0 6px; border-radius:3px; background:#f2f2f2; color:#666; margin-left:4px; vertical-align:middle; white-space:nowrap; }
+.chip.jp { background:#e3eefc; color:#1d6fd6; }
+.chip.warn { background:#fff1dc; color:#b45309; }
+.chip.ok { background:#e7f6ec; color:#15803d; }
+.chip.count { margin:0 6px 0 0; font-weight:bold; }
+.row .site a { color:#666; }
+.row .site a:hover { color:#000; text-decoration:underline; }
+.chip.first { background:#f3e8ff; color:#6b21a8; }
+.tag { font-size:10.5px; border:1px solid #ddd; border-radius:3px; padding:0 4px; margin-left:4px; color:#888; font-style:normal; }
+.tag.rule { color:#15803d; border-color:#b7e3c5; }
+.tag.first { color:#6b21a8; border-color:#d8b4fe; }
+.hidden { display:none; }
+.small { color:#888; font-size:12px; }
+.bottom { margin-top:6px; padding-bottom:20px; }
+table.cmp { width:100%; border-collapse:collapse; font-size:12.5px; background:#fff; }
+table.cmp th, table.cmp td { border:1px solid #f0c8da; padding:5px 7px; vertical-align:top; }
+table.cmp th { background:#fff0f6; position:sticky; top:0; }
+table.cmp td.t { min-width:160px; }
+.diff { background:#fde8e8; border-radius:3px; padding:0 3px; }
+@media (max-width:640px) { body { font-size:15px; } .row .time, .row .ttl, .row .site { font-size:15px; } .row { flex-wrap:wrap; } .row .site { flex-basis:100%; padding-left:60px; } .tab { font-size:12px; } .wrap { padding:0 6px; } }
+</style><script>
+function genAgo(){
+  document.querySelectorAll('.gen[data-ts]').forEach(function(el){
+    var t = Date.parse(el.dataset.ts);
+    if (isNaN(t)) return;
+    var min = Math.max(1, Math.floor((Date.now() - t) / 60000));
+    el.textContent = (min < 60 ? min + '分' : min < 1440 ? Math.floor(min / 60) + '時間' : Math.floor(min / 1440) + '日') + '前に作成';
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){ genAgo(); setInterval(genAgo, 60000); });
+
+var showSingles = false;
+function applyFilters(){
+  var rel = parseInt(document.getElementById('f-rel').value,10);
+  var hideOld = document.getElementById('f-old').checked;
+  var hideChat = document.getElementById('f-chat').checked;
+  var country = document.getElementById('f-country').value;
+  var shown = 0, multi = 0, singles = 0, singlesTotal = 0;
+  document.querySelectorAll('.topic').forEach(function(el){
+    var isSingle = el.classList.contains('single');
+    if (isSingle) singlesTotal++;
+    var show = parseInt(el.dataset.rel,10) >= rel;
+    if (hideOld && el.dataset.old === '1') show = false;
+    if (hideChat && el.dataset.cat === '雑談・ネタ') show = false;
+    if (country && el.dataset.country !== country) show = false;
+    if (isSingle && !showSingles) show = false;
+    el.classList.toggle('hidden', !show);
+    if (show) { shown++; if (isSingle) singles++; else multi++; }
+  });
+  document.querySelectorAll('section.day').forEach(function(sec){
+    var any = sec.querySelector('.topic:not(.hidden)') !== null;
+    sec.classList.toggle('hidden', !any);
+  });
+  document.getElementById('f-count').textContent = '表示 ' + shown + ' 件 (複数まとめ ' + multi + ' / 1 件のもの ' + singles + ')';
+  var btn = document.getElementById('btn-singles');
+  btn.textContent = showSingles ? '1 件のものを隠す' : '1 件のもの (' + singlesTotal + ' 件) を表示';
+  btn.classList.toggle('on', showSingles);
+}
+document.addEventListener('DOMContentLoaded', function(){
+  ['f-rel','f-old','f-chat','f-country'].forEach(function(id){ document.getElementById(id).addEventListener('change', applyFilters); });
+  document.getElementById('btn-singles').addEventListener('click', function(){ showSingles = !showSingles; applyFilters(); });
+  applyFilters();
+});
+</script></head><body><div class="wrap"><header><h1><a href="../index.html">記事タイ比較あんてな私用　＼(*^◯^*)／</a><span class="sub">Claude Sonnet 5.5 の判定 · 記事 0 件 · 話題 0 件 · <span class="gen" data-ts="2026-11-01T05:02:26+09:00">11/01 05:02 に作成</span></span></h1></header><main><div class="box"></div></main><div class="bottom"><div class="toolbar"><button id="btn-singles" type="button">1 件のものを表示</button><label>日本との関係 <select id="f-rel"><option value="0">すべて</option><option value="1">間接的以上</option><option value="2">日本関連以上</option><option value="3">日本国内のみ</option></select></label><label><input type="checkbox" id="f-old"> 古い話題を隠す</label><label><input type="checkbox" id="f-chat"> 雑談を隠す</label><label>国 <select id="f-country"><option value="">すべて</option></select></label><span id="f-count"></span></div><div class="tabs"><a class="tab" style="background:#D4E4FF" href="../haiku/index.html">Claude Haiku 5.5</a><a class="tab active" style="background:#FFD4E4" href="../sonnet/index.html">Claude Sonnet 5.5</a><a class="tab" style="background:#D4FFE4" href="../opus/index.html">Claude Opus 5.5</a><a class="tab" style="background:#DAFFD6" href="../gpt/index.html">GPT-6.1 Sol</a><a class="tab" style="background:#D6FFFA" href="../astra/index.html">GPT-6 Astra</a><a class="tab" style="background:#FAD6FF" href="../compare/index.html">比較</a></div></div></div></body></html>
